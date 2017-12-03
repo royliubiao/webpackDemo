@@ -79,6 +79,24 @@ module.exports = {
             // ( 公共chunk(commnons chunk) 的名称)
             filename: "public/scripts/conmmons/[name]-[hash:5].min.js",
         }),
-
+        //编译layout.html
+        new HtmlWebpackPlugin({ // Also generate a test.html
+            filename: './views/layout.html', //输出
+            template: 'src/widget/layout.html', //输入模板
+            inject: false //模板中不注入静态资源
+        }),
+        //编译index.js
+        new HtmlWebpackPlugin({ // Also generate a test.html
+            filename: './views/index.html', //输出
+            template: 'src/views/index.js', //输入模板
+            inject: false, //模板中不注入静态资源
+            chunks: ['vendor', 'index', 'tag']
+        }),
+        //编译index.html——因为views/index.js中有使用index.html所以index.html也需要编译
+        new HtmlWebpackPlugin({ // Also generate a test.html
+            filename: './widget/index.html', //输出
+            template: 'src/widget/index.html', //输入模板
+            inject: false, //模板中不注入静态资源
+        })
     ]
 }
