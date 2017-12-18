@@ -73,7 +73,7 @@ module.exports = {
             filename: './views/index.html', //输出
             template: 'src/views/index.js' ,//输入模板
             inject: false ,//模板中不注入静态资源
-            chunks:['vendor','index','tag']
+            chunks:['vendor','index','tag']//添加块
         }),
         //编译index.html——因为views/index.js中有使用index.html所以index.html也需要编译
         new HtmlWebpackPlugin({ // Also generate a test.html

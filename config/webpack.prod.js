@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin"); //分离css
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin'); //压缩js
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //压缩
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //编译html
 module.exports = {
     //入口文件
     entry: {
@@ -12,15 +12,14 @@ module.exports = {
             path.join(__dirname, '../src/public/scripts/addNum.js')
 
         ],
-        tags: [
+        tag: [
             path.join(__dirname, '../src/public/scripts/tag.es'),
         ]
-
     },
     //输出文件
     output: {
-        path: path.join(__dirname, '../build'),
-        filename: 'public/scripts/[name]-[hash:5].js'
+        filename: 'public/scripts/[name]-[hash:5].js',
+        path: path.join(__dirname, '../build')
     },
     // loader资源处理
     module: {
@@ -30,7 +29,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env']
+                        presets: ['es2015', 'stage-0']
                     }
                 }
             },
@@ -97,6 +96,6 @@ module.exports = {
             filename: './widget/index.html', //输出
             template: 'src/widget/index.html', //输入模板
             inject: false, //模板中不注入静态资源
-        })
+        }),
     ]
 }
